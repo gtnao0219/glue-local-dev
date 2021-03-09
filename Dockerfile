@@ -21,8 +21,10 @@ RUN wget -q https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/${SPARK
 ENV PYTHON_VERSION 3.7
 
 RUN apt-get update \
-  && apt-get install --no-install-suggests --no-install-recommends --yes python${PYTHON_VERSION} \
-  && rm -rf /var/lib/apt/lists/*
+  && apt-get install --no-install-suggests --no-install-recommends --yes python${PYTHON_VERSION} python3-setuptools python3-pip \
+  && rm -rf /var/lib/apt/lists/* \
+  && ln -s `which python${PYTHON_VERSION}}` /usr/local/bin/python \
+  && ln -s `which pip3` /usr/local/bin/pip
 
 
 # Glue
